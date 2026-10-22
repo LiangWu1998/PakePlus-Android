@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#194b3c">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src blob: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>物品小屋 · 离线物品管理</title>
+  <style>:root{color-scheme:light;--bg:#f5f6f0;--paper:#fffefa;--green:#194b3c;--green-light:#eaf0e4;--ink:#213d32;--muted:#7a8479;--border:#e2e6dc;--lime:#d8ebaa;--danger:#a64437;--shadow:0 8px 30px #203c3110}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--bg);font:15px/1.6 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:1px solid var(--border);background:var(--paper);color:var(--ink);border-radius:12px;min-height:44px;padding:10px 16px;font-weight:620;touch-action:manipulation}button:hover:not(:disabled){border-color:#9eb193}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #a2bd83;outline-offset:3px}h1,h2,h3,p{margin:0}h1{font-size:30px;letter-spacing:-.8px;line-height:1.35}h2{font-size:20px;line-height:1.4}h3{font-size:16px}small{font-size:12px}svg{width:21px;height:21px;display:block;flex:none;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}[hidden]{display:none!important}.primary{background:var(--green);border-color:var(--green);color:white;display:inline-flex;align-items:center;justify-content:center;gap:8px}.secondary{background:var(--green-light);border-color:transparent;color:var(--green)}.danger-button{color:var(--danger);border-color:#e6cfc7}.text-button{border:0;background:transparent;padding:6px 4px;color:var(--muted);min-height:36px;font-size:13px}.icon-button{display:inline-flex;align-items:center;justify-content:center;width:38px;min-height:38px;padding:7px;background:transparent;border:0;border-radius:10px}.muted{color:var(--muted)}.sidebar{position:fixed;inset:0 auto 0 0;width:232px;padding:35px 20px 22px;background:#fffef9;border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:10}.brand{display:flex;align-items:center;gap:11px;font-size:22px;font-weight:760;letter-spacing:-.6px;padding:0 5px}.brand-icon{width:42px;height:42px;display:grid;place-items:center;background:var(--green);color:var(--lime);border-radius:14px}.brand-icon svg{width:25px;height:25px}.brand small{display:block;font-size:10px;color:var(--muted);font-weight:400;letter-spacing:1.5px;margin-top:2px}.nav-caption{color:#9bA291;font-size:10px;letter-spacing:1.5px;margin:43px 15px 12px}.navigation{display:grid;gap:9px}.navigation button{border:0;background:transparent;display:flex;align-items:center;gap:12px;padding:13px 15px;text-align:left;color:#788374;font-size:14px;min-height:49px}.navigation button.active{background:var(--green);color:#fff}.navigation .nav-count{margin-left:auto;font-size:11px;background:#ffffff24;padding:0 7px;border-radius:5px}.sidebar-note{margin-top:auto;padding:24px 17px 30px;color:var(--muted);font-size:12px}.sidebar-note>svg{width:27px;height:27px;color:#91a779;margin-bottom:12px}.sidebar-note p{line-height:1.9}.sidebar-note>span{display:block;font-size:10px;margin-top:12px;color:#a0a78f}.storage-card{display:flex;align-items:center;gap:10px;padding:12px;background:#f1f4e9;border:1px solid #e2e8d9;text-align:left;width:100%;font-size:11px;min-height:65px}.storage-card>span:nth-child(2){flex:1;min-width:0}.storage-card b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:650}.storage-card small{font-size:10px;color:var(--muted);font-weight:400}.storage-card>svg:last-child{width:14px;height:14px}.main{margin-left:232px;padding:28px 42px 20px;max-width:1570px;min-height:100vh}.topbar{display:flex;align-items:center;gap:16px;margin-bottom:12px}.search-wrap{display:flex;align-items:center;gap:11px;max-width:590px;flex:1;background:#fffefb;border:1px solid var(--border);border-radius:14px;padding:0 14px;height:49px;color:#89957e}.search-wrap input{background:transparent;border:0;min-width:0;width:100%;outline:none;color:var(--ink);font-size:13px}.search-wrap input::-webkit-search-cancel-button{display:none}.search-wrap input:focus-visible{outline:none}.search-wrap:focus-within{border-color:#94ab82;box-shadow:0 0 0 3px #94ab821a}.add-top{margin-left:auto;white-space:nowrap}.save-strip{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);padding:0 2px 14px;min-height:30px}.dot{width:6px;height:6px;flex:none;border-radius:50%;background:#a8afa2}.dot.ok{background:#6f9751}.dot.bad{background:#b85c48}#mode-label{margin-left:auto;color:#8b957d}.mobile-brand{display:none}.notice{background:#f6ebd2;color:#876b34;border:1px solid #eedfbb;border-radius:12px;padding:12px 16px;font-size:12px;margin:0 0 17px;display:flex;align-items:center;gap:12px;justify-content:space-between}.notice.danger{background:#faeee7;border-color:#ecd5c6;color:#8d5044}.notice button{font-size:12px;white-space:nowrap;padding:7px 12px;min-height:36px}.hero{position:relative;overflow:hidden;border:1px solid #dce4d2;border-radius:23px;background:#e8eedf;margin:12px 0 30px;padding:33px 34px}.hero:after{content:"";position:absolute;width:250px;height:250px;right:-63px;top:-65px;border:1px solid #cad7b8;border-radius:50%;box-shadow:0 0 0 31px #dce5ce66,0 0 0 63px #dce5ce33;pointer-events:none}.hero-eyebrow{font-size:10px;letter-spacing:2px;color:#7d8e6b;margin-bottom:9px}.hero h1{position:relative;z-index:1;font-size:31px}.hero>p{position:relative;z-index:1;color:#7c8a71;margin:12px 0 23px;font-size:13px;max-width:470px}.hero-actions{display:flex;gap:10px;position:relative;z-index:1}.hero-stats{display:flex;gap:29px;margin-top:23px;position:relative;z-index:1;font-size:11px;color:#87947b}.hero-stats strong{font-size:22px;color:#3f6047;font-weight:650;display:block;line-height:1.4}.section-heading{display:flex;align-items:center;gap:14px;justify-content:space-between;margin-bottom:17px}.section-heading p{font-size:12px;color:var(--muted);margin-top:5px}.section-heading button{font-size:12px}.category-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:17px}.category-card{position:relative;padding:22px;border:1px solid var(--border);border-radius:18px;background:var(--paper);box-shadow:0 3px 10px #233a2b03;min-height:184px;cursor:pointer;transition:transform .15s,border-color .15s;outline:none}.category-card:hover{transform:translateY(-2px);border-color:#a5b59a}.category-icon{display:grid;place-items:center;width:49px;height:49px;border-radius:15px;background:var(--tint,#f0eddc);color:var(--accent,#8a8b50);margin-bottom:17px}.category-icon svg{width:26px;height:26px}.category-card h3{font-size:17px;overflow-wrap:anywhere;padding-right:17px}.category-card p{font-size:11px;color:var(--muted);margin-top:7px}.category-menu{position:absolute;right:12px;top:13px}.category-arrow{position:absolute;right:21px;bottom:21px;color:#a5ad9a}.category-arrow svg{width:16px}.empty{background:var(--paper);border:1px dashed #d8dfce;border-radius:19px;text-align:center;padding:48px 20px;color:var(--muted);grid-column:1/-1}.empty>svg{width:39px;height:39px;color:#a1b090;margin:0 auto 14px}.empty h3{color:#65765e;font-weight:650;font-size:16px;margin-bottom:7px}.empty p{font-size:12px;max-width:420px;margin:0 auto 20px}.empty button{font-size:12px}.breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:17px 0 18px;color:var(--muted);font-size:12px}.breadcrumb button{padding:3px 4px;font-size:12px;min-height:29px;border:0;background:transparent;color:var(--muted);font-weight:400}.breadcrumb svg{width:12px;height:12px}.page-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:10px 0 23px}.page-title p{font-size:12px;color:var(--muted);margin-top:7px}.page-title h1{overflow-wrap:anywhere}.filters{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:19px}.filters select{border:1px solid var(--border);border-radius:9px;background:var(--paper);padding:8px 11px;font-size:12px;color:#67795f;max-width:180px;min-height:39px}.filters .count{font-size:11px;color:var(--muted);margin-left:auto}.items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(166px,1fr));gap:17px}.item-card{padding:9px 9px 14px;background:var(--paper);border:1px solid var(--border);border-radius:17px;cursor:pointer;min-width:0;outline:none}.image-wrap{background:#eceee5;border-radius:11px;aspect-ratio:1;display:grid;place-items:center;position:relative;overflow:hidden;color:#b1baa5}.image-wrap img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}.image-wrap>svg{width:35px;height:35px}.image-wrap .no-preview{position:absolute;bottom:9px;left:9px;right:9px;padding:5px;border-radius:7px;background:#ffffffd9;color:#7d8874;font-size:10px;text-align:center}.item-card h3{font-size:13px;font-weight:650;margin:12px 4px 4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}.item-card .item-path{font-size:10px;color:var(--muted);margin:0 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.location{display:flex;align-items:center;gap:3px;margin:7px 4px 0;color:#8a967c;font-size:10px;overflow-wrap:anywhere}.location svg{width:12px;height:12px}.load-more{display:block;margin:25px auto 0;min-width:140px;font-size:12px}.page-footer{padding:34px 0 12px;color:#a0a794;font-size:10px;text-align:center}.detail{display:grid;grid-template-columns:1.15fr 1fr;gap:30px;margin-top:19px;background:var(--paper);border:1px solid var(--border);border-radius:22px;padding:24px}.detail-photo{background:#edf0e6;border-radius:16px;display:grid;place-items:center;min-height:300px;overflow:hidden;position:relative}.detail-photo img{width:100%;max-height:520px;object-fit:contain;display:block}.detail-photo>svg{width:50px;height:50px;color:#abb99c}.detail-body{padding:12px 5px;min-width:0}.detail-body h1{font-size:28px;margin:10px 0 16px;overflow-wrap:anywhere}.detail-body .path-label{font-size:11px;color:#8b967b}.detail-description{white-space:pre-wrap;font-size:13px;line-height:1.95;margin:22px 0;color:#64745c;overflow-wrap:anywhere}.detail-meta{font-size:11px;color:#9aa28f;line-height:2}.detail-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}.detail-actions button{font-size:12px}.setting-panel{background:var(--paper);border:1px solid var(--border);border-radius:18px;margin:16px 0;padding:23px}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid #eff1e9}.setting-row:first-child{padding-top:5px}.setting-row:last-child{padding-bottom:0;border:0}.setting-row p{font-size:12px;color:var(--muted);margin-top:5px;max-width:530px}.setting-row button{font-size:12px;white-space:nowrap}.setting-row h3{font-size:14px}.setting-panel pre{font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--muted)}dialog{border:1px solid var(--border);padding:0;border-radius:22px;background:var(--paper);color:var(--ink);width:min(540px,calc(100% - 28px));max-height:90dvh;box-shadow:0 22px 100px #122e3240}dialog::backdrop{background:#142f2966;backdrop-filter:blur(3px)}.dialog-inner{padding:26px}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.dialog-head h2{font-size:21px}.dialog-subtitle{font-size:12px;color:var(--muted);margin:-10px 0 17px}.form-field{display:block;margin:15px 0}.form-field>span{display:block;font-size:12px;font-weight:650;margin-bottom:7px}.form-field input,.form-field textarea,.form-field select{width:100%;background:#fff;border:1px solid #dce2d3;color:var(--ink);border-radius:10px;padding:11px 12px;min-height:45px;font-size:13px}.form-field textarea{resize:vertical;min-height:100px}.form-field input::placeholder,.form-field textarea::placeholder{color:#adb4a5}.form-note{font-size:11px;color:var(--muted)}.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:23px;flex-wrap:wrap}.form-actions button{font-size:12px}.form-error{color:#a04d3c;background:#fbede7;padding:10px 12px;border-radius:9px;font-size:12px;margin-top:12px;white-space:pre-line}.photo-picker{border:1px dashed #ccd8bf;border-radius:14px;padding:15px;text-align:center;background:#f1f4e9}.photo-picker img{display:block;max-height:170px;max-width:100%;margin:0 auto 12px;border-radius:9px}.photo-picker .buttons{display:flex;gap:8px;justify-content:center;margin-top:8px}.photo-picker button{font-size:12px;min-height:40px;padding:8px 12px}.photo-picker p{font-size:11px;color:var(--muted);overflow-wrap:anywhere}.photo-picker>svg{margin:3px auto 9px;color:#a7b79a;width:29px;height:29px}.zoom-dialog{width:min(1200px,calc(100% - 20px))}.zoom-dialog img{max-width:100%;max-height:75dvh;display:block;margin:auto;object-fit:contain}.toast{position:fixed;bottom:26px;left:calc(50% + 116px);transform:translateX(-50%);z-index:80;background:#203f34;color:white;font-size:12px;padding:12px 20px;border-radius:12px;box-shadow:var(--shadow);max-width:min(90%,580px);text-align:center}.busy-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#183e3270;backdrop-filter:blur(2px)}.busy-screen>div{background:var(--paper);border-radius:20px;padding:30px;min-width:250px;text-align:center;max-width:90%;box-shadow:var(--shadow)}.busy-screen strong{display:block;font-size:15px;margin:15px 0 8px}.busy-screen p{font-size:12px;color:var(--muted)}.spinner{display:block;margin:auto;width:26px;height:26px;border:2px solid #dee6d6;border-top-color:var(--green);border-radius:50%;animation:spin .9s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+button{display:inline-flex;align-items:center;justify-content:center;gap:8px}.navigation button{justify-content:flex-start}.with-image>svg{display:none}.dialog-busy{position:sticky;bottom:0;background:var(--green);color:#fff;padding:14px 22px;font-size:12px;text-align:center;box-shadow:0 -4px 20px #194b3c22}.dialog-inner[aria-busy="true"]{opacity:.6}.startup-panel{border-color:#bfd0aa;background:#f8faef}.startup-description{font-size:12px;color:#65765e;margin-top:8px;overflow-wrap:anywhere}.startup-actions{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 13px}.startup-actions button{font-size:12px}.startup-notice .buttons{display:flex;flex-wrap:wrap;gap:8px}
+@media(min-width:1600px){.main{padding-left:58px;padding-right:58px}.items-grid{grid-template-columns:repeat(5,minmax(160px,1fr))}}
+@media(max-width:1040px){.sidebar{width:205px;padding-left:14px;padding-right:14px}.main{margin-left:205px;padding:25px}.brand{font-size:19px}.items-grid{grid-template-columns:repeat(3,minmax(120px,1fr))}.detail{gap:18px;padding:18px}.toast{left:calc(50% + 102px)}}
+@media(max-width:760px){.sidebar{position:fixed;inset:auto 0 0;width:100%;height:calc(68px + env(safe-area-inset-bottom));padding:0 8px env(safe-area-inset-bottom);border:0;border-top:1px solid var(--border);background:#fffefbf7;backdrop-filter:blur(14px)}.sidebar .brand,.nav-caption,.sidebar-note,.storage-card{display:none}.navigation{display:grid;grid-template-columns:repeat(4,1fr);gap:0;height:68px}.navigation button{display:flex;flex-direction:column;justify-content:center;gap:4px;font-size:9px;padding:7px 2px;border-radius:0;min-height:60px;position:relative}.navigation button.active{color:var(--green);background:transparent}.navigation button.active:before{content:"";position:absolute;top:5px;width:38px;height:28px;border-radius:12px;background:#eaf0df;z-index:-1}.navigation svg{width:21px;height:21px}.navigation .nav-count{display:none}.main{margin-left:0;padding:18px 17px 85px;max-width:none}.topbar{gap:10px;flex-wrap:wrap}.mobile-brand{display:flex;align-items:center;gap:7px;font-size:18px;font-weight:750;order:0;flex:1}.mobile-brand svg{width:24px;height:24px;color:var(--green)}.add-top{order:1;min-height:38px;font-size:11px;padding:8px 12px;border-radius:10px}.add-top svg{width:16px;height:16px}.search-wrap{order:2;max-width:none;flex-basis:100%;margin-top:8px;height:45px}.save-strip{font-size:10px;padding-bottom:8px}.save-strip #save-label{white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.save-strip #mode-label{white-space:nowrap}.hero{padding:23px 23px;margin:12px 0 25px;border-radius:19px}.hero h1{font-size:27px}.hero>p{font-size:11px;max-width:230px;margin:12px 0 20px}.hero:after{right:-170px;top:-50px}.hero-actions button{font-size:11px;padding:9px 13px;min-height:40px}.hero-stats{gap:29px;margin-top:20px}.hero-stats strong{font-size:20px}.hero-stats span{font-size:10px}.section-heading h2{font-size:18px}.section-heading button{font-size:11px;min-height:37px;padding:7px 11px}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.category-card{min-height:164px;padding:17px}.category-icon{width:41px;height:41px;border-radius:12px;margin-bottom:15px}.category-icon svg{width:23px;height:23px}.category-card h3{font-size:15px}.category-card p{font-size:10px}.category-menu{right:5px;top:6px}.category-arrow{right:16px;bottom:17px}.items-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.item-card{border-radius:14px;padding:7px 7px 11px}.image-wrap{border-radius:9px}.item-card h3{font-size:12px;margin-top:10px}.item-card .item-path{font-size:9px}.location{font-size:9px}.page-title h1{font-size:24px}.page-title{margin-top:12px;margin-bottom:19px}.page-title p{font-size:11px}.page-title>button{font-size:11px;padding:9px 12px;min-height:39px}.filters{gap:6px}.filters select{max-width:calc(50% - 4px);font-size:11px;padding:8px;min-height:37px}.filters .count{font-size:10px}.detail{grid-template-columns:1fr;gap:13px;padding:14px;border-radius:19px}.detail-photo{min-height:230px}.detail-photo img{max-height:360px}.detail-body{padding:7px 6px 13px}.detail-body h1{font-size:24px}.detail-description{margin:16px 0}.detail-actions button{flex:1}.setting-panel{padding:19px}.setting-row{gap:12px;align-items:flex-start}.setting-row h3{font-size:13px}.setting-row p{font-size:11px}.setting-row button{font-size:11px;padding:8px 11px;min-height:39px}.notice{font-size:11px;padding:11px 12px;gap:9px;align-items:flex-start;flex-wrap:wrap}.notice button{font-size:11px}.dialog-inner{padding:21px}.dialog-head h2{font-size:20px}dialog{max-height:90dvh;border-radius:18px}.form-actions{justify-content:stretch}.form-actions button{flex:1;white-space:nowrap}.toast{left:50%;bottom:calc(84px + env(safe-area-inset-bottom));max-width:90%}.page-footer{font-size:9px;padding-top:28px}.breadcrumb{font-size:11px;margin:12px 0}.breadcrumb button{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+  <noscript>请允许浏览器运行 JavaScript，然后重新打开本地页面。</noscript>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-icon" data-icon="home"></span><div>物品小屋<small>把生活，收纳妥当。</small></div></div>
+    <div class="nav-caption">我的物品</div>
+    <nav class="navigation" aria-label="主导航">
+      <button data-route="home"><span data-icon="grid"></span>分类总览</button>
+      <button data-route="all"><span data-icon="box"></span>全部物品<span id="nav-count" class="nav-count">0</span></button>
+      <button data-route="trash"><span data-icon="trash"></span>回收站<span id="trash-count" class="nav-count">0</span></button>
+      <button data-route="settings"><span data-icon="settings"></span>数据与设置</button>
+    </nav>
+    <div class="sidebar-note"><span data-icon="leaf"></span><p>照片和文字，都留在<br>你自己的文件夹里。</p><span>本地使用 · 无需账号</span></div>
+    <button id="sidebar-connect" class="storage-card"><span data-icon="folder"></span><span><b id="folder-label">连接数据文件夹</b><small id="storage-caption">开始本地保存</small></span><span data-icon="chevron"></span></button>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <span class="mobile-brand"><span data-icon="home"></span>物品小屋</span>
+      <div class="search-wrap"><span data-icon="search"></span><input id="search" type="search" placeholder="搜索所有物品的标题…" aria-label="全局标题搜索" autocomplete="off" maxlength="160"><button id="clear-search" class="icon-button" aria-label="清空搜索" hidden><span data-icon="close"></span></button></div>
+      <button id="top-add" class="primary add-top"><span data-icon="plus"></span><span>添加物品</span></button>
+    </header>
+    <div class="save-strip"><span id="save-dot" class="dot"></span><span id="save-label" role="status" aria-live="polite">尚未连接数据文件夹</span><span id="mode-label">离线使用</span></div>
+    <div id="mode-notice" class="notice" hidden></div>
+    <div id="startup-notice" class="notice startup-notice" hidden><span id="startup-message"></span><div class="buttons"><button id="startup-resume" hidden>继续授权</button><button id="startup-settings">查看启动设置</button></div></div>
+    <div id="recovery-notice" class="notice danger" hidden><span>主数据异常，当前只读显示上一份记录。恢复后可以继续编辑。</span><button id="recover-previous">恢复上一份数据</button></div>
+    <section id="content" aria-live="polite"></section>
+    <footer class="page-footer">物品小屋 v1.1 · 数据保存在你选择的文件夹 · 无需联网</footer>
+  </main>
+  <dialog id="dialog"><div id="dialog-content"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <div id="busy-screen" class="busy-screen" hidden><div><span class="spinner"></span><strong id="busy-title">正在保存…</strong><p id="busy-progress">请等待操作完成</p></div></div>
+  <script>(function (root, factory) {
+  "use strict";
+  const api = factory();
+  if (typeof module === "object" && module.exports) module.exports = api;
+  else root.ItemShelf = api;
+})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+  "use strict";
+  const APP = "offline-item-shelf", VERSION = 1, DIRECTORY = "item-shelf-data";
+  const MAX_IMAGE = 40 * 1024 * 1024, MAX_JSON = 16 * 1024 * 1024;
+  const MEDIA_NAME = /^(image|thumb)-[a-z0-9-]{8,100}\.(jpg|jpeg|png|webp|gif|heic|heif|avif|bmp)$/i;
+  const TYPES = { jpg:"image/jpeg", jpeg:"image/jpeg", png:"image/png", webp:"image/webp", gif:"image/gif", heic:"image/heic", heif:"image/heif", avif:"image/avif", bmp:"image/bmp" };
+  const copy = value => JSON.parse(JSON.stringify(value));
+  const now = () => new Date().toISOString();
+  const uid = () => globalThis.crypto && typeof globalThis.crypto.randomUUID === "function" ? globalThis.crypto.randomUUID() : Date.now().toString(16) + "-" + Math.random().toString(16).slice(2);
+  const insist = (condition, message) => { if (!condition) throw new Error(message); };
+  const validId = value => typeof value === "string" && /^[a-z0-9-]{8,100}$/i.test(value);
+  const validDate = value => typeof value === "string" && Number.isFinite(Date.parse(value));
+  function text(value, label, max, required) {
+    insist(typeof value === "string", label + "格式不正确。");
+    const result = value.trim();
+    insist(!required || !!result, label + "不能为空。");
+    insist(result.length <= max, label + "不能超过 " + max + " 个字符。");
+    return result;
+  }
+  function empty(libraryId) {
+    return { app:APP, version:VERSION, libraryId:libraryId || uid(), revision:0, commitId:uid(), savedAt:now(), majorCategories:[], minorCategories:[], items:[] };
+  }
+  function validateMedia(media) {
+    insist(media && MEDIA_NAME.test(media.name), "图片文件名不符合本软件的数据格式。");
+    insist(Number.isInteger(media.size) && media.size > 0 && media.size <= MAX_IMAGE, "图片大小不符合要求。");
+    insist(Object.values(TYPES).includes(media.mime), "图片格式不受支持。");
+    insist(media.hash && ((media.hash.algorithm === "sha256" && /^[a-f0-9]{64}$/.test(media.hash.value)) || (media.hash.algorithm === "fnv1a32" && /^[a-f0-9]{8}$/.test(media.hash.value))), "图片校验信息不完整。");
+  }
+  function validate(data, libraryId) {
+    insist(data && data.app === APP && data.version === VERSION, "数据格式或版本不受支持。");
+    insist(validId(data.libraryId) && (!libraryId || data.libraryId === libraryId), "数据与当前文件夹不匹配。");
+    insist(Number.isInteger(data.revision) && data.revision >= 0 && validId(data.commitId) && validDate(data.savedAt), "数据版本信息损坏。");
+    for (const key of ["majorCategories", "minorCategories", "items"]) insist(Array.isArray(data[key]) && data[key].length <= 50000, "分类或物品列表不符合要求。");
+    const ids = new Set(), major = new Set(), minor = new Set();
+    const identity = obj => { insist(obj && validId(obj.id) && !ids.has(obj.id), "数据存在重复或无效的 ID。"); ids.add(obj.id); insist(validDate(obj.createdAt) && validDate(obj.updatedAt), "记录时间信息不完整。"); };
+    for (const item of data.majorCategories) { identity(item); insist(text(item.name, "大分类名称", 60, true) === item.name, "分类名称不规范。"); major.add(item.id); }
+    for (const item of data.minorCategories) { identity(item); insist(major.has(item.majorId), "小分类的所属大分类不存在。"); insist(text(item.name, "小分类名称", 60, true) === item.name, "分类名称不规范。"); minor.add(item.id); }
+    for (const item of data.items) {
+      identity(item); insist(minor.has(item.minorId), "物品的所属小分类不存在。");
+      insist(text(item.title, "物品标题", 160, true) === item.title, "物品标题不规范。");
+      text(item.description, "描述", 4000, false); text(item.location, "存放位置", 160, false);
+      insist(item.deletedAt === null || validDate(item.deletedAt), "回收状态不正确。");
+      insist(item.image && typeof item.image.sourceName === "string" && item.image.sourceName.length <= 300, "图片信息不完整。");
+      validateMedia(item.image.original); if (item.image.thumbnail !== null) validateMedia(item.image.thumbnail);
+    }
+    references(data); return data;
+  }
+  const find = (array, id, label) => { const value = array.find(item => item.id === id); insist(value, label + "已经不存在，请重新打开。"); return value; };
+  const active = data => data.items.filter(item => item.deletedAt === null);
+  function itemPath(data, item) {
+    const minor = data.minorCategories.find(value => value.id === item.minorId);
+    const major = minor && data.majorCategories.find(value => value.id === minor.majorId);
+    return major && minor ? major.name + " / " + minor.name : "所属分类不存在";
+  }
+  function query(data, options) {
+    const opts = options || {}, term = String(opts.query || "").normalize("NFKC").toLowerCase().trim();
+    const minors = new Map(data.minorCategories.map(value => [value.id, value]));
+    return data.items.filter(item => {
+      const minor = minors.get(item.minorId);
+      return (!!opts.trash === !!item.deletedAt) && (!opts.minorId || item.minorId === opts.minorId)
+        && (!opts.majorId || minor && minor.majorId === opts.majorId) && (!opts.location || item.location === opts.location)
+        && (!term || item.title.normalize("NFKC").toLowerCase().includes(term));
+    }).sort((a, b) => opts.sort === "title" ? a.title.localeCompare(b.title, "zh-CN") || a.id.localeCompare(b.id)
+      : String(opts.sort === "updated" ? b.updatedAt : b.createdAt).localeCompare(opts.sort === "updated" ? a.updatedAt : a.createdAt) || a.id.localeCompare(b.id));
+  }
+  const Ops = {
+    addMajor(data, name) { const obj = { id:uid(), name:text(name, "大分类名称", 60, true), createdAt:now(), updatedAt:now() }; data.majorCategories.push(obj); return obj.id; },
+    addMinor(data, majorId, name) { find(data.majorCategories, majorId, "大分类"); const obj = { id:uid(), majorId, name:text(name, "小分类名称", 60, true), createdAt:now(), updatedAt:now() }; data.minorCategories.push(obj); return obj.id; },
+    renameMajor(data, id, name) { const obj = find(data.majorCategories, id, "大分类"); obj.name = text(name, "大分类名称", 60, true); obj.updatedAt = now(); },
+    renameMinor(data, id, name) { const obj = find(data.minorCategories, id, "小分类"); obj.name = text(name, "小分类名称", 60, true); obj.updatedAt = now(); },
+    deleteMajor(data, id) { find(data.majorCategories, id, "大分类"); insist(!data.minorCategories.some(item => item.majorId === id), "请先移除这个大分类中的小分类。非空分类不会直接删除。"); data.majorCategories = data.majorCategories.filter(item => item.id !== id); },
+    deleteMinor(data, id) { find(data.minorCategories, id, "小分类"); insist(!data.items.some(item => item.minorId === id), "这个小分类仍有物品，可能位于回收站。请先移动、恢复或彻底删除这些物品。"); data.minorCategories = data.minorCategories.filter(item => item.id !== id); },
+    saveItem(data, input) {
+      find(data.minorCategories, input.minorId, "小分类");
+      const fields = { minorId:input.minorId, title:text(input.title, "物品标题", 160, true), description:text(input.description || "", "描述", 4000, false), location:text(input.location || "", "存放位置", 160, false), updatedAt:now() };
+      if (input.id) { const obj = find(data.items, input.id, "物品"); insist(obj.deletedAt === null, "请先从回收站恢复这件物品。"); if (input.image) fields.image = copy(input.image); Object.assign(obj, fields); return obj.id; }
+      insist(input.image, "请先拍照或选择一张物品图片。");
+      const obj = { id:uid(), ...fields, image:copy(input.image), createdAt:now(), deletedAt:null }; data.items.push(obj); return obj.id;
+    },
+    trash(data, id) { const obj = find(data.items, id, "物品"); obj.deletedAt = now(); obj.updatedAt = now(); },
+    restore(data, id) { const obj = find(data.items, id, "物品"); find(data.minorCategories, obj.minorId, "所属小分类"); obj.deletedAt = null; obj.updatedAt = now(); },
+    purge(data, id) { const obj = find(data.items, id, "物品"); insist(obj.deletedAt !== null, "物品需要先移入回收站。"); data.items = data.items.filter(item => item.id !== id); }
+  };
+  function references(data) {
+    const map = new Map();
+    for (const item of data.items) for (const media of [item.image.original, item.image.thumbnail]) if (media) {
+      const prior = map.get(media.name); insist(!prior || JSON.stringify(prior) === JSON.stringify(media), "图片引用信息冲突。"); map.set(media.name, media);
+    }
+    return map;
+  }
+  async function hash(bytes, algorithm) {
+    const mode = algorithm || (globalThis.crypto && globalThis.crypto.subtle ? "sha256" : "fnv1a32");
+    if (mode === "sha256") {
+      insist(globalThis.crypto && globalThis.crypto.subtle, "当前打开环境无法完成 SHA-256 校验。");
+      const digest = new Uint8Array(await globalThis.crypto.subtle.digest("SHA-256", bytes));
+      return { algorithm:mode, value:Array.from(digest, byte => byte.toString(16).padStart(2, "0")).join("") };
+    }
+    let value = 2166136261; for (const byte of new Uint8Array(bytes)) { value ^= byte; value = Math.imul(value, 16777619); }
+    return { algorithm:"fnv1a32", value:(value >>> 0).toString(16).padStart(8, "0") };
+  }
+  async function readJSON(dir, name) {
+    const file = await (await dir.getFileHandle(name)).getFile(); insist(file.size <= MAX_JSON, "数据文件过大，已停止读取。");
+    try { return JSON.parse(await file.text()); } catch (_) { throw new Error("数据文件格式损坏：" + name); }
+  }
+  async function optionalJSON(dir, name) { try { return await readJSON(dir, name); } catch (error) { if (error.name === "NotFoundError") return null; throw error; } }
+  async function writeFile(dir, name, value) {
+    const handle = await dir.getFileHandle(name, { create:true });
+    insist(typeof handle.createWritable === "function", "这个文件夹不支持直接写入。请重新选择并授予读写权限。");
+    const stream = await handle.createWritable();
+    try { await stream.write(value); await stream.close(); } catch (error) { try { await stream.abort(); } catch (_) {} throw error; }
+  }
+  async function writeJSON(dir, name, value) {
+    const serialized = JSON.stringify(value, null, 2);
+    insist(new Blob([serialized]).size <= MAX_JSON, "记录内容超过当前版本的容量限制，未写入这次变更。请保留现有数据并联系开发者。");
+    await writeFile(dir, name, serialized);
+    insist(JSON.stringify(await readJSON(dir, name)) === JSON.stringify(value), "写入后校验失败，请重新连接文件夹核对数据。");
+  }
+  async function verifiedFile(dir, media) {
+    validateMedia(media); const file = await (await dir.getFileHandle(media.name)).getFile();
+    insist(file.size === media.size, "图片大小不一致：" + media.name);
+    insist((await hash(await file.arrayBuffer(), media.hash.algorithm)).value === media.hash.value, "图片内容校验失败：" + media.name);
+    return new Blob([file], { type:media.mime });
+  }
+  async function putMedia(dir, payload, prefix) {
+    insist(payload && payload.blob && payload.blob.size > 0 && payload.blob.size <= MAX_IMAGE, "请选择不超过 40 MB 的有效图片。");
+    const extension = payload.extension;
+    insist(Object.prototype.hasOwnProperty.call(TYPES, extension), "不支持这种图片格式。");
+    const bytes = await payload.blob.arrayBuffer();
+    const media = { name:(prefix || "image") + "-" + uid() + "." + extension, mime:TYPES[extension], size:bytes.byteLength, hash:await hash(bytes) };
+    await writeFile(dir, media.name, bytes); await verifiedFile(dir, media); return media;
+  }
+  async function saveBundle(destination, data, sourceImages, progress) {
+    const images = await destination.getDirectoryHandle("images", { create:true });
+    const refs = Array.from(references(data).values()); let count = 0;
+    for (const media of refs) {
+      const file = await verifiedFile(sourceImages, media); await writeFile(images, media.name, file); await verifiedFile(images, media);
+      if (progress) progress(++count, refs.length);
+    }
+    await writeJSON(destination, "data.json", data);
+    // Completion marker is written last; incomplete copies cannot be restored.
+    await writeJSON(destination, "backup.json", { app:APP, version:VERSION, complete:true, libraryId:data.libraryId, commitId:data.commitId, fileCount:refs.length, createdAt:now() });
+  }
+  async function inspectBackup(dir) {
+    const marker = await readJSON(dir, "backup.json");
+    insist(marker && marker.app === APP && marker.version === VERSION && marker.complete === true, "这不是一份完整、受支持的物品管理备份。");
+    const data = validate(await readJSON(dir, "data.json"), marker.libraryId);
+    insist(data.commitId === marker.commitId && references(data).size === marker.fileCount, "备份记录与完成标记不一致。");
+    const images = await dir.getDirectoryHandle("images");
+    return { dir, data, images, marker };
+  }
+  class FolderStore {
+    constructor(root, marker, data, images) { this.root = root; this.marker = marker; this.data = data; this.images = images; this.isDemo = false; this.recovery = false; this.halted = false; this.queue = Promise.resolve(); }
+    static async open(parent, options) {
+      const opts = options || {};
+      let root, marker, existingRootMarker = null;
+      if (opts.existing) {
+        root = parent; marker = await readJSON(root, "workspace.json");
+        insist(marker && marker.app === APP && marker.version === VERSION && marker.initialized === true && marker.libraryId === opts.libraryId, "已记住的文件夹与原清单不匹配，请在设置中重新选择。未创建或覆盖数据。");
+      } else {
+        try { existingRootMarker = await optionalJSON(parent, "workspace.json"); } catch (error) { if (parent.name === DIRECTORY) throw error; }
+        if (existingRootMarker && existingRootMarker.app === APP) { root = parent; marker = existingRootMarker; }
+        else { root = await parent.getDirectoryHandle(DIRECTORY, { create:true }); marker = await optionalJSON(root, "workspace.json"); }
+      }
+      if (!marker) {
+        for await (const entry of root.values()) throw new Error("同名数据子文件夹已有其他文件，请选择另一个空文件夹。已有内容未被覆盖。");
+        marker = { app:APP, version:VERSION, libraryId:uid(), initialized:false, createdAt:now() };
+        await writeJSON(root, "workspace.json", marker);
+      }
+      insist(marker.app === APP && marker.version === VERSION && validId(marker.libraryId) && typeof marker.initialized === "boolean", "文件夹标记无效或版本不支持，未覆盖原数据。");
+      let data, recovery = false;
+      try {
+        data = await optionalJSON(root, "data.json");
+        if (!data) { insist(!opts.existing && !marker.initialized, "主数据文件丢失。"); data = empty(marker.libraryId); await writeJSON(root, "data.json", data); }
+        validate(data, marker.libraryId);
+      } catch (error) {
+        let previous = null; try { previous = validate(await readJSON(root, "data.previous.json"), marker.libraryId); } catch (_) {}
+        insist(previous, error.message + " 未找到可用的上一份数据；请保留文件并使用完整备份恢复。");
+        data = previous; recovery = true;
+      }
+      if (!marker.initialized && !recovery) { marker = { ...marker, initialized:true }; await writeJSON(root, "workspace.json", marker); }
+      const images = await root.getDirectoryHandle("images", { create:!opts.existing });
+      const store = new FolderStore(root, marker, data, images); store.recovery = recovery; return store;
+    }
+    static async openExisting(root, libraryId) { return FolderStore.open(root, { existing:true, libraryId }); }
+    async getMedia(media) {
+      validateMedia(media); const file = await (await this.images.getFileHandle(media.name)).getFile();
+      insist(file.size === media.size, "图片文件大小异常。"); return new Blob([file], { type:media.mime });
+    }
+    async currentMatches() { const current = validate(await readJSON(this.root, "data.json"), this.marker.libraryId); insist(current.commitId === this.data.commitId, "数据已被另一个页面更新。请重新连接后再编辑，避免覆盖新记录。"); }
+    transact(change, mediaInput) {
+      const work = async () => {
+        insist(!this.recovery, "当前为恢复预览，请先恢复上一份数据。"); insist(!this.halted, "上次保存未能确认，请先重新连接文件夹。");
+        await this.currentMatches();
+        const next = copy(this.data); let image = null, stage = "media";
+        try {
+          if (mediaInput) { const original = await putMedia(this.images, mediaInput.original, "image"); const thumbnail = mediaInput.thumbnail ? await putMedia(this.images, mediaInput.thumbnail, "thumb") : null; image = { original, thumbnail, sourceName:mediaInput.sourceName.slice(0,300) }; }
+          stage = "validation";
+          const result = change(next, image); next.revision += 1; next.commitId = uid(); next.savedAt = now(); validate(next, this.marker.libraryId);
+          stage = "commit";
+          await this.currentMatches();
+          await writeJSON(this.root, "data.previous.json", this.data);
+          await this.currentMatches(); await writeJSON(this.root, "data.json", next);
+          this.data = next; return result;
+        } catch (error) { if (stage !== "validation") this.halted = true; throw error; }
+      };
+      const result = this.queue.then(work); this.queue = result.catch(() => {}); return result;
+    }
+    async recoverPrevious() {
+      await this.queue; insist(this.recovery, "当前数据无需恢复。");
+      try {
+        const file = await (await this.root.getFileHandle("data.json")).getFile();
+        await writeFile(this.root, "damaged-" + uid() + ".json", file);
+      } catch (error) { if (error.name !== "NotFoundError") throw error; }
+      await writeJSON(this.root, "data.json", this.data); this.recovery = false; this.halted = false;
+    }
+    async backup(parent, progress) {
+      await this.queue; insist(!this.halted && !this.recovery, "请先重新连接或恢复数据，再制作完整备份。"); await this.currentMatches();
+      const name = "物品备份-" + now().slice(0,19).replace(/[:T]/g,"-") + "-" + uid().slice(0,8);
+      const dir = await parent.getDirectoryHandle(name, { create:true });
+      for await (const entry of dir.values()) throw new Error("备份目标已存在内容，已停止覆盖。");
+      await saveBundle(dir, copy(this.data), this.images, progress); return name;
+    }
+    async restore(backup, progress) {
+      await this.queue; insist(!this.halted && !this.recovery, "请先重新连接或恢复数据。"); await this.currentMatches();
+      // Check every source file before changing any library records.
+      for (const media of references(backup.data).values()) await verifiedFile(backup.images, media);
+      const safetyParent = await this.root.getDirectoryHandle("safety-backups", { create:true });
+      const safety = await this.backup(safetyParent, progress);
+      const next = copy(backup.data); next.libraryId = this.marker.libraryId;
+      const renamed = new Map(); let count = 0; const refs = Array.from(references(next).values());
+      for (const media of refs) {
+        const blob = await verifiedFile(backup.images, media);
+        const replacement = await putMedia(this.images, { blob, extension:media.name.split(".").pop().toLowerCase() }, media.name.startsWith("thumb-") ? "thumb" : "image");
+        renamed.set(media.name, replacement); if (progress) progress(++count, refs.length);
+      }
+      for (const item of next.items) { item.image.original = renamed.get(item.image.original.name); if (item.image.thumbnail) item.image.thumbnail = renamed.get(item.image.thumbnail.name); }
+      await this.transact(target => { target.majorCategories = next.majorCategories; target.minorCategories = next.minorCategories; target.items = next.items; });
+      return safety;
+    }
+    async cleanUnused() {
+      await this.queue; insist(!this.recovery && !this.halted, "请先重新连接或恢复数据。"); await this.currentMatches();
+      const previous = await optionalJSON(this.root, "data.previous.json"); if (previous) validate(previous, this.marker.libraryId);
+      const used = new Set([...references(this.data).keys(), ...(previous ? references(previous).keys() : [])]);
+      let count = 0;
+      for await (const entry of this.images.values()) if (entry.kind === "file" && MEDIA_NAME.test(entry.name) && !used.has(entry.name)) { await this.images.removeEntry(entry.name); count++; }
+      return count;
+    }
+  }
+  class MemoryStore {
+    constructor() { this.isDemo = true; this.recovery = false; this.halted = false; this.data = empty(); this.files = new Map(); this.queue = Promise.resolve(); }
+    async transact(change, mediaInput) {
+      const next = copy(this.data); let image = null;
+      if (mediaInput) {
+        const make = async (input, prefix) => { const bytes = await input.blob.arrayBuffer(); const value = { name:prefix + "-" + uid() + "." + input.extension, mime:TYPES[input.extension], size:bytes.byteLength, hash:await hash(bytes) }; this.files.set(value.name, input.blob); return value; };
+        image = { original:await make(mediaInput.original, "image"), thumbnail:mediaInput.thumbnail ? await make(mediaInput.thumbnail, "thumb") : null, sourceName:mediaInput.sourceName };
+      }
+      const result = change(next, image); next.revision++; next.commitId = uid(); next.savedAt = now(); validate(next); this.data = next; return result;
+    }
+    async getMedia(media) { insist(this.files.has(media.name), "示例图片不存在。"); return this.files.get(media.name); }
+  }
+  return { APP, VERSION, DIRECTORY, TYPES, MAX_IMAGE, MEDIA_NAME, copy, uid, now, empty, validate, active, query, itemPath, Ops, references, FolderStore, MemoryStore, inspectBackup, hash, verifiedFile };
+});
+</script>
+  <script>(function (root, factory) {
+  "use strict";
+  const api = factory();
+  if (typeof module === "object" && module.exports) module.exports = api;
+  else root.ItemShelfStartup = api;
+})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+  "use strict";
+  const APP = "offline-item-shelf-startup", VERSION = 1;
+  const DATABASE = "item-shelf-preferences", STORE = "settings", KEY = "startup-folder";
+  const insist = (condition, message) => { if (!condition) throw new Error(message); };
+  function validate(entry) {
+    insist(entry && entry.app === APP && entry.version === VERSION, "启动文件夹设置无效，请重新选择并记住文件夹。");
+    insist(typeof entry.libraryId === "string" && /^[a-z0-9-]{8,100}$/i.test(entry.libraryId), "启动文件夹的清单标记无效。");
+    insist(typeof entry.label === "string" && entry.label.length > 0 && entry.label.length <= 2048 && typeof entry.savedAt === "string" && Number.isFinite(Date.parse(entry.savedAt)), "启动文件夹信息不完整。");
+    const handle = entry.handle;
+    insist(handle && handle.kind === "directory" && typeof handle.name === "string" && typeof handle.getFileHandle === "function" && typeof handle.getDirectoryHandle === "function", "浏览器未保留可用的文件夹引用，请重新选择并记住文件夹。");
+    return entry;
+  }
+  class Preferences {
+    constructor(factory, timeoutMs) { this.factory = factory; this.timeoutMs = timeoutMs || 5000; }
+    open() {
+      return new Promise((resolve, reject) => {
+        let request, settled = false;
+        const finish = (error, db) => {
+          if (settled) { if (db) db.close(); return; }
+          settled = true; clearTimeout(timer); if (error) reject(error); else resolve(db);
+        };
+        const timer = setTimeout(() => finish(new Error("浏览器暂时无法读取启动设置，请关闭同一页面的其他窗口后重试。")), this.timeoutMs);
+        try {
+          insist(this.factory && typeof this.factory.open === "function", "当前打开方式不支持记住文件夹；仍可手动连接并保存物品。");
+          request = this.factory.open(DATABASE, VERSION);
+          request.onupgradeneeded = () => { if (!request.result.objectStoreNames.contains(STORE)) request.result.createObjectStore(STORE); };
+          request.onerror = () => finish(request.error || new Error("浏览器无法打开启动设置。"));
+          request.onblocked = () => finish(new Error("启动设置被另一个页面占用，请关闭其他页面后重试。"));
+          request.onsuccess = () => { const db = request.result; db.onversionchange = () => db.close(); finish(null, db); };
+        } catch (error) { finish(error); }
+      });
+    }
+    async transaction(mode, operation) {
+      const db = await this.open();
+      try {
+        return await new Promise((resolve, reject) => {
+          let tx, request, value, settled = false;
+          const finish = (error) => { if (settled) return; settled = true; clearTimeout(timer); if (error) reject(error); else resolve(value); };
+          const timer = setTimeout(() => { try { if (tx) tx.abort(); } catch (_) {} finish(new Error("启动设置保存或读取超时，请重试。")); }, this.timeoutMs);
+          try {
+            tx = db.transaction(STORE, mode);
+            tx.oncomplete = () => finish();
+            tx.onabort = () => finish(tx.error || new Error("启动设置操作未完成。"));
+            tx.onerror = () => finish(tx.error || new Error("浏览器无法保存或读取启动设置。"));
+            request = operation(tx.objectStore(STORE));
+            request.onsuccess = () => { value = request.result; };
+            request.onerror = () => finish(request.error || new Error("启动设置操作失败。"));
+          } catch (error) { try { if (tx) tx.abort(); } catch (_) {} finish(error); }
+        });
+      } finally { db.close(); }
+    }
+    async load() {
+      const entry = await this.transaction("readonly", store => store.get(KEY));
+      return entry === undefined || entry === null ? null : validate(entry);
+    }
+    async save(handle, libraryId, label) {
+      const entry = validate({ app:APP, version:VERSION, handle, libraryId, label:label || handle.name, savedAt:new Date().toISOString() });
+      await this.transaction("readwrite", store => store.put(entry, KEY));
+      // Wait for the transaction to commit, then read back the cloned native handle.
+      const saved = await this.load();
+      insist(saved && saved.libraryId === libraryId && saved.label === entry.label && saved.savedAt === entry.savedAt, "启动设置写入后校验失败，请重试。");
+      if (typeof handle.isSameEntry === "function") insist(await handle.isSameEntry(saved.handle), "浏览器未能正确保存文件夹引用，请重新选择。");
+      return saved;
+    }
+    async clear() { await this.transaction("readwrite", store => store.delete(KEY)); }
+  }
+  async function permission(entry, interactive) {
+    validate(entry);
+    const handle = entry.handle, method = interactive ? "requestPermission" : "queryPermission";
+    if (typeof handle[method] !== "function") {
+      if (!interactive) return "prompt";
+      throw new Error("当前浏览器无法恢复已记住的文件夹权限，请点击“选择并记住”重新选择。");
+    }
+    // requestPermission is called directly from a button handler, without first
+    // awaiting IndexedDB or invoking the directory picker again.
+    const state = await handle[method]({ mode:"readwrite" });
+    insist(["granted","prompt","denied"].includes(state), "浏览器返回了无法识别的文件夹权限状态。");
+    return state;
+  }
+  async function reopen(entry, interactive, openExisting) {
+    const state = await permission(entry, interactive);
+    if (state !== "granted") return { state:"permission", permission:state };
+    const store = await openExisting(entry.handle, entry.libraryId);
+    return { state:"connected", store };
+  }
+  return { APP, VERSION, DATABASE, STORE, KEY, validate, Preferences, permission, reopen };
+});
+</script>
+  <script>"use strict";
+(() => {
+  const C = ItemShelf, S = ItemShelfStartup, $ = id => document.getElementById(id);
+  const paths = {
+    home:'<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-8h6v8"/>',
+    grid:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',
+    box:'<path d="m3 7 9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10M7 5l10 4"/>',
+    folder:'<path d="M3 7V5a1 1 0 0 1 1-1h5l3 3h8a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/>',
+    trash:'<path d="M3 6h18M8 6V3h8v3M5 6l1 15h12l1-15M10 10v7M14 10v7"/>',
+    settings:'<path d="m9 3-1 3-3 1 1 4-1 3 3 2 1 5h6l1-5 3-2-1-3 1-4-3-1-1-3z"/><circle cx="12" cy="12" r="3"/>',
+    leaf:'<path d="M20 3C8 2 2 8 6 16s16 1 14-13zM4 21 16 9M10 16v-5M10 15h5"/>',
+    search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',
+    plus:'<path d="M12 5v14M5 12h14"/>', close:'<path d="m6 6 12 12M18 6 6 18"/>',
+    chevron:'<path d="m9 5 7 7-7 7"/>', more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
+    image:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 6-6 4 4 3-3 5 5"/>',
+    pin:'<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0z"/><circle cx="12" cy="10" r="2"/>',
+    shirt:'<path d="m8 3-6 4 3 6 3-2v10h8V11l3 2 3-6-6-4a4 4 0 0 1-8 0z"/>',
+    shoe:'<path d="M3 14V7l5 1 3 5 9 3 1 5H3zM11 13l3-3M14 14l3-2M3 18h18"/>',
+    tool:'<path d="m14 6 4 4 4-5a7 7 0 0 1-9 9l-7 7-3-3 7-7a7 7 0 0 1 9-9z"/>',
+    book:'<path d="M12 5c-3-3-8-2-10-1v15c3-2 7-2 10 0 3-2 7-2 10 0V4c-2-1-7-2-10 1zM12 5v14"/>',
+    restore:'<path d="M3 11a9 9 0 1 1 2 7M3 4v7h7M12 7v5l3 2"/>',
+    edit:'<path d="m15 4 5 5M3 21l5-1L21 7l-5-5L3 15z"/>',
+    download:'<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>',
+    check:'<path d="m5 12 4 4L20 5"/>', back:'<path d="m15 5-7 7 7 7"/>'
+  };
+  function icon(name) { const span = document.createElement("span"); span.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + (paths[name] || paths.box) + '</svg>'; return span.firstChild; }
+  function el(tag, attrs, children) {
+    const node = document.createElement(tag);
+    for (const [key, value] of Object.entries(attrs || {})) {
+      if (key === "text") node.textContent = value;
+      else if (key === "class") node.className = value;
+      else if (key.startsWith("on")) node.addEventListener(key.slice(2), value);
+      else if (key in node) node[key] = value;
+      else node.setAttribute(key, value);
+    }
+    for (const child of children || []) if (child !== null && child !== undefined) node.append(typeof child === "string" ? document.createTextNode(child) : child);
+    return node;
+  }
+  const button = (text, fn, cls, name) => el("button", { type:"button", class:cls || "", onclick:fn }, [...(name ? [icon(name)] : []), el("span", { text })]);
+  const ui = { store:null, busy:false, query:"", composing:false, filterMajor:"", filterLocation:"", sort:"new", limit:24, renderId:0, urls:new Set(), toastTimer:null, searchTimer:null, dialogDirty:false, dialogUrls:[], modal:null, lastMinor:"", lastLocation:"", returnHash:"#/all", scroll:new Map(), lastHash:location.hash || "#/home", connectionEpoch:0, preferenceEpoch:0, startup:{ entry:null, state:"loading", issue:"" } };
+  const blank = C.empty();
+  const data = () => ui.store ? ui.store.data : blank;
+  const writable = () => ui.store && !ui.store.recovery && !ui.store.halted && !ui.busy;
+  function toast(message) { clearTimeout(ui.toastTimer); $("toast").textContent = message; $("toast").hidden = false; ui.toastTimer = setTimeout(() => { $("toast").hidden = true; }, 4200); }
+  function message(error) {
+    return ({ AbortError:"操作已取消。", NotAllowedError:"文件夹权限已失效。请重新连接，并允许读写。", SecurityError:"当前打开方式不允许目录访问。请使用已通过检测的 Edge 打开方式。", NotFoundError:"文件或文件夹没有找到，请确认选择的是原来的数据文件夹。", QuotaExceededError:"存储空间不足，本次保存未完成。", InvalidStateError:"文件暂时无法访问，请重新连接后核对数据。" })[error.name] || error.message || String(error);
+  }
+  function status(text, error) { $("save-label").textContent = text; $("save-dot").className = "dot" + (error ? " bad" : ui.store && !ui.store.isDemo ? " ok" : ""); }
+  function refreshChrome() {
+    const d = data(), connected = !!ui.store;
+    $("nav-count").textContent = C.active(d).length; $("trash-count").textContent = d.items.filter(item => item.deletedAt).length;
+    $("folder-label").textContent = !connected ? "连接数据文件夹" : ui.store.isDemo ? "正在体验示例" : ui.store.root.name;
+    $("storage-caption").textContent = connected && !ui.store.isDemo ? "点击重新连接" : "开始本地保存";
+    $("mode-label").textContent = ui.store && ui.store.isDemo ? "示例 · 仅本次有效" : "本地离线";
+    $("mode-notice").hidden = !(ui.store && (ui.store.isDemo || ui.store.halted));
+    $("mode-notice").textContent = ui.store && ui.store.halted ? "上次保存未能确认。请在“数据与设置”中重新连接文件夹，核对后再继续。" : "你正在体验示例。修改只在本次页面有效，刷新会清空；连接数据文件夹后开始正式保存。";
+    $("recovery-notice").hidden = !(ui.store && ui.store.recovery);
+    $("startup-notice").hidden = connected || !["loading","permission","error"].includes(ui.startup.state);
+    $("startup-message").textContent = startupDescription();
+    $("startup-resume").hidden = !ui.startup.entry || ui.startup.state === "loading";
+    $("startup-resume").textContent = ui.startup.state === "permission" ? "继续授权" : "重试连接";
+    if (!ui.busy) status(!connected ? "连接文件夹后，每次保存会自动写入本地" : ui.store.isDemo ? "示例模式，不写入实际文件" : ui.store.halted ? "保存未能确认，请重新连接" : ui.store.recovery ? "已只读打开上一份记录" : "已保存到文件夹 · " + new Date(d.savedAt).toLocaleTimeString("zh-CN", { hour12:false }), !!(ui.store && ui.store.halted));
+    const route = (location.hash || "#/home").split("/")[1];
+    for (const node of document.querySelectorAll("[data-route]")) { const target = node.dataset.route; node.classList.toggle("active", target === route || target === "home" && ["major","minor"].includes(route) || target === "all" && ["search","item"].includes(route)); }
+    $("clear-search").hidden = !ui.query;
+  }
+  function navigate(hash) {
+    if (ui.busy) return;
+    if ($("dialog").open && !closeDialog()) return;
+    ui.scroll.set(location.hash || "#/home", window.scrollY); ui.limit = 24;
+    if (location.hash === hash) render(); else location.hash = hash;
+  }
+  function requireStore() { if (!writable()) { toast(ui.store && ui.store.recovery ? "请先恢复上一份数据，再继续编辑。" : "请先连接可写的数据文件夹。"); return false; } return true; }
+  async function task(title, work) {
+    if (ui.busy) return { ok:false };
+    ui.busy = true; $("busy-screen").hidden = false; $("busy-title").textContent = title; $("busy-progress").textContent = "请等待写入与校验完成"; status(title);
+    const modal = ui.modal;
+    if (modal) { modal.inner.inert = true; modal.inner.setAttribute("aria-busy","true"); $("dialog-content").append(el("div", { id:"dialog-busy", class:"dialog-busy", role:"status", text:title + " 请等待写入与校验完成。" })); }
+    try { const value = await work(); return { ok:true, value }; }
+    catch (error) { toast(message(error)); if (ui.modal) formError(message(error)); return { ok:false, error }; }
+    finally { if (modal) { modal.inner.inert = false; modal.inner.removeAttribute("aria-busy"); } if ($("dialog-busy")) $("dialog-busy").remove(); ui.busy = false; $("busy-screen").hidden = true; refreshChrome(); }
+  }
+  function progress(done, total) { const text = "图片 " + done + " / " + total + "，正在复制并校验"; $("busy-progress").textContent = text; if ($("dialog-busy")) $("dialog-busy").textContent = text; }
+  function clearPageUrls() { for (const url of ui.urls) URL.revokeObjectURL(url); ui.urls.clear(); }
+  async function fillImage(node, item, large, token) {
+    const media = large ? item.image.original : item.image.thumbnail;
+    if (!media || !ui.store) { if (!large) node.append(el("span", { class:"no-preview", text:"点开查看原图" })); return; }
+    try {
+      const blob = await ui.store.getMedia(media);
+      if (token !== ui.renderId || !node.isConnected) return;
+      const url = URL.createObjectURL(blob); ui.urls.add(url);
+      const img = el("img", { src:url, alt:item.title, loading:"lazy", decoding:"async" });
+      img.addEventListener("error", () => { img.remove(); node.classList.remove("with-image"); node.append(el("span", { class:"no-preview", text:"此格式无法预览" })); });
+      node.classList.add("with-image"); node.append(img);
+    } catch (_) { if (node.isConnected) node.append(el("span", { class:"no-preview", text:"图片无法读取，请检查文件" })); }
+  }
+  function actionable(node, action, name) { node.tabIndex = 0; node.setAttribute("role", "button"); node.setAttribute("aria-label", name); node.addEventListener("click", action); node.addEventListener("keydown", event => { if (event.target === node && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); action(); } }); return node; }
+  function emptyState(title, caption, action, actionName) { return el("div", { class:"empty" }, [icon("box"), el("h3", { text:title }), el("p", { text:caption }), ...(action ? [button(actionName, action, "secondary", "plus")] : [])]); }
+  function breadcrumb(parts) {
+    const row = el("div", { class:"breadcrumb" }, [button("分类总览", () => navigate("#/home"))]);
+    for (const part of parts) { row.append(icon("chevron")); row.append(part.hash ? button(part.name, () => navigate(part.hash)) : el("span", { text:part.name })); }
+    return row;
+  }
+  function titleRow(title, caption, action, actionName) { return el("div", { class:"page-title" }, [el("div", {}, [el("h1", { text:title }), el("p", { text:caption })]), ...(action ? [button(actionName, action, "primary", "plus")] : [])]); }
+  function categoryIcon(name) { return /衣|裤|裙|衫|服|毛衣|外套/.test(name) ? "shirt" : /鞋/.test(name) ? "shoe" : /工具|电|数码/.test(name) ? "tool" : /书|文|证/.test(name) ? "book" : "folder"; }
+  function categoryCard(item, minor, index) {
+    const d = data(), childIds = minor ? [item.id] : d.minorCategories.filter(value => value.majorId === item.id).map(value => value.id);
+    const count = C.active(d).filter(value => childIds.includes(value.minorId)).length;
+    const colors = [["#eee7d8","#a18a59"],["#e1e9db","#6d8b60"],["#eee2db","#b38b73"],["#e2e8e7","#6d8a86"],["#e9e3ed","#96849e"]][index % 5];
+    const card = el("article", { class:"category-card", style:"--tint:" + colors[0] + ";--accent:" + colors[1] });
+    const menu = button("", event => { event.stopPropagation(); categoryDialog(minor ? "minor" : "major", item); }, "icon-button category-menu", "more"); menu.setAttribute("aria-label", "管理分类“" + item.name + "”");
+    card.append(menu, el("div", { class:"category-icon" }, [icon(categoryIcon(item.name))]), el("h3", { text:item.name }), el("p", { text:(minor ? "" : childIds.length + " 个小分类 · ") + count + " 件物品" }), el("span", { class:"category-arrow" }, [icon("chevron")]));
+    return actionable(card, () => navigate("#/" + (minor ? "minor/" : "major/") + item.id), "打开分类“" + item.name + "”");
+  }
+  function home(root) {
+    const d = data(), connected = !!ui.store;
+    const hero = el("div", { class:"hero" }, [el("div", { class:"hero-eyebrow", text:"A PLACE FOR EVERYTHING" }), el("h1", { text:"每一件，都有它的位置。" }), el("p", { text:connected ? "从衣柜到抽屉，用照片记下你的物品。需要的时候，轻松找回来。" : "用照片记录物品，用分类整理生活。连接一个手机文件夹，开始你的离线物品清单。" })]);
+    const actions = el("div", { class:"hero-actions" });
+    if (!connected) actions.append(button("连接数据文件夹", connect, "primary", "folder"), button("先看看示例", startDemo, "secondary"));
+    else actions.append(button("添加一件物品", () => itemDialog(), "primary", "plus"));
+    const stats = el("div", { class:"hero-stats" });
+    for (const [number, name] of [[C.active(d).length,"件物品"],[d.majorCategories.length,"个大分类"],[d.minorCategories.length,"个小分类"]]) stats.append(el("span", {}, [el("strong", { text:String(number) }), name]));
+    hero.append(actions, stats); root.append(hero);
+    root.append(el("div", { class:"section-heading" }, [el("div", {}, [el("h2", { text:"我的分类" }), el("p", { text:"按照自己的习惯，慢慢整理。" })]), button("新建大分类", () => categoryDialog("major"), "secondary", "plus")]));
+    const grid = el("div", { class:"category-grid" }); d.majorCategories.forEach((item, index) => grid.append(categoryCard(item, false, index)));
+    if (!d.majorCategories.length) grid.append(emptyState("从第一个分类开始", "例如衣服、鞋子、工具或证件。分类名称都可以由你自己决定。", () => connected ? categoryDialog("major") : connect(), connected ? "添加第一个分类" : "连接文件夹"));
+    root.append(grid);
+  }
+  function majorPage(root, id) {
+    const d = data(), item = d.majorCategories.find(value => value.id === id); if (!item) { root.append(emptyState("分类不存在", "它可能已经被删除。", () => navigate("#/home"), "返回首页")); return; }
+    const children = d.minorCategories.filter(value => value.majorId === id);
+    root.append(breadcrumb([{ name:item.name }]), titleRow(item.name, children.length + " 个小分类", () => categoryDialog("minor", null, id), "新建小分类"));
+    const grid = el("div", { class:"category-grid" }); children.forEach((obj, index) => grid.append(categoryCard(obj, true, index)));
+    if (!children.length) grid.append(emptyState("给这个分类分几个小格", "例如在“衣服”里添加毛衣、裤子和外套。", () => categoryDialog("minor", null, id), "添加小分类")); root.append(grid);
+  }
+  function itemCard(item, token) {
+    const card = el("article", { class:"item-card" }), image = el("div", { class:"image-wrap" }, [icon("image")]);
+    card.append(image, el("h3", { text:item.title }), el("p", { class:"item-path", text:C.itemPath(data(), item) }));
+    if (item.location) card.append(el("p", { class:"location" }, [icon("pin"), el("span", { text:item.location })]));
+    actionable(card, () => { ui.returnHash = location.hash || "#/all"; navigate("#/item/" + item.id); }, "查看物品“" + item.title + "”");
+    requestAnimationFrame(() => fillImage(image, item, false, token)); return card;
+  }
+  function selectControl(options, value, onChange, label) {
+    const node = el("select", { "aria-label":label, onchange:() => onChange(node.value) });
+    for (const option of options) node.append(el("option", { value:option[0], text:option[1] })); node.value = value; return node;
+  }
+  function listPage(root, route, id, token) {
+    const d = data(), minor = route === "minor" && d.minorCategories.find(value => value.id === id), trash = route === "trash", search = route === "search";
+    if (route === "minor" && !minor) { root.append(emptyState("小分类不存在", "请返回分类总览。", () => navigate("#/home"), "返回首页")); return; }
+    if (minor) { const major = d.majorCategories.find(value => value.id === minor.majorId); root.append(breadcrumb([{ name:major.name, hash:"#/major/" + major.id },{ name:minor.name }])); }
+    root.append(titleRow(minor ? minor.name : trash ? "回收站" : search ? "搜索结果" : "全部物品", trash ? "物品会保留在这里，直到你恢复或彻底删除。" : search ? "按标题查找全部分类中的物品。" : "用照片，记住每一件属于你的东西。", !trash && !search ? () => itemDialog(null, minor && minor.id) : null, "添加物品"));
+    const filters = el("div", { class:"filters" });
+    if (!minor) filters.append(selectControl([["","全部大分类"], ...d.majorCategories.map(value => [value.id,value.name])], ui.filterMajor, value => { ui.filterMajor = value; ui.limit = 24; render(); }, "按大分类筛选"));
+    const locations = [...new Set(d.items.filter(value => !!value.deletedAt === trash).map(value => value.location).filter(Boolean))].sort((a,b) => a.localeCompare(b,"zh-CN"));
+    filters.append(selectControl([["","全部存放位置"], ...locations.map(value => [value,value])], ui.filterLocation, value => { ui.filterLocation = value; ui.limit = 24; render(); }, "按存放位置筛选"));
+    filters.append(selectControl([["new","最近添加"],["updated","最近修改"],["title","标题顺序"]], ui.sort, value => { ui.sort = value; render(); }, "物品排序"));
+    const values = C.query(d, { query:search ? ui.query : "", minorId:minor && minor.id, majorId:minor ? "" : ui.filterMajor, location:ui.filterLocation, sort:ui.sort, trash });
+    filters.append(el("span", { class:"count", text:values.length + " 件物品" })); root.append(filters);
+    const grid = el("div", { class:"items-grid" }); values.slice(0,ui.limit).forEach(item => grid.append(itemCard(item, token)));
+    if (!values.length) grid.append(emptyState(trash ? "回收站是空的" : search ? "没有找到匹配物品" : "这里还没有物品", trash ? "删除的物品会先来到这里。" : search ? "换一个标题关键词，或者清空分类和位置筛选。" : "拍一张照片，写下标题，就能把它记录下来。", !trash && !search ? () => itemDialog(null, minor && minor.id) : null, "添加第一件物品"));
+    root.append(grid); if (values.length > ui.limit) root.append(button("再显示 24 件", () => { const y = window.scrollY; ui.limit += 24; render(); window.scrollTo(0,y); }, "load-more"));
+  }
+  function detailPage(root, id, token) {
+    const item = data().items.find(value => value.id === id); root.append(button("返回列表", () => navigate(ui.returnHash), "text-button", "back"));
+    if (!item) { root.append(emptyState("物品不存在", "它可能已经被彻底删除。")); return; }
+    const image = el("div", { class:"detail-photo" }, [icon("image")]);
+    const body = el("div", { class:"detail-body" }, [el("div", { class:"path-label", text:C.itemPath(data(),item) }), el("h1", { text:item.title })]);
+    if (item.location) body.append(el("p", { class:"location" }, [icon("pin"), el("span", { text:item.location })]));
+    if (item.description) body.append(el("p", { class:"detail-description", text:item.description }));
+    body.append(el("p", { class:"detail-meta", text:"添加于 " + new Date(item.createdAt).toLocaleDateString("zh-CN") }), el("p", { class:"detail-meta", text:"原图 " + (item.image.original.size / 1048576).toFixed(2) + " MB · " + (item.deletedAt ? "位于回收站" : ui.store.isDemo ? "示例图片，刷新后清空" : "已保存在本地") }));
+    const actions = el("div", { class:"detail-actions" });
+    if (item.deletedAt) actions.append(button("恢复物品", () => itemAction("restore", item), "primary", "restore"), button("彻底删除", () => itemAction("purge",item), "danger-button", "trash"));
+    else actions.append(button("编辑物品", () => itemDialog(item), "primary", "edit"), button("移入回收站", () => itemAction("trash",item), "", "trash"));
+    actions.append(button("放大图片", () => zoom(item), "", "image")); body.append(actions); root.append(el("div", { class:"detail" }, [image, body])); fillImage(image,item,true,token);
+  }
+  function settings(root) {
+    root.append(titleRow("数据与设置", "数据在你的文件夹里，记得为它留一份备份。"));
+    const startup = el("div", { class:"setting-panel startup-panel" }, [el("h3", { text:"启动文件夹" }), el("p", { id:"startup-description", class:"startup-description", text:startupDescription() })]);
+    const startupActions = el("div", { class:"startup-actions" }, [button("选择并记住", () => connect(true), "primary", "folder")]);
+    if (ui.store && !ui.store.isDemo && !ui.store.halted && !ui.store.recovery) startupActions.append(button("记住当前文件夹", rememberCurrent, "secondary"));
+    if (ui.startup.entry) startupActions.append(button(ui.startup.state === "permission" ? "继续授权" : "打开启动文件夹", () => resumeStartup(true)), button("取消记住", forgetStartup, "text-button"));
+    startup.append(startupActions, el("p", { class:"form-note", text:"记住后，重新打开会自动尝试连接。浏览器要求授权时，点击“继续授权”即可。取消记住仅移除启动设置，物品和照片仍保留。" }));
+    root.append(startup);
+    const panel = el("div", { class:"setting-panel" });
+    const row = (title, caption, name, action) => el("div", { class:"setting-row" }, [el("div", {}, [el("h3", { text:title }), el("p", { text:caption })]), button(name,action)]);
+    panel.append(row("数据文件夹", ui.store && !ui.store.isDemo ? "当前目录：" + ui.store.root.name + "。重新连接会读取已保存的数据。" : "选择手机上的普通文件夹，照片和记录都会保存在里面。", "连接文件夹", connect));
+    panel.append(row("完整备份", "把当前分类、物品、回收站和全部图片复制到一份独立备份文件夹。", "制作备份", backup));
+    panel.append(row("从完整备份恢复", "整库恢复，会替换当前清单。恢复前会先在本地保留一份完整安全备份。", "选择备份", restore));
+    panel.append(row("清理未引用图片", "只清理软件图片目录中，当前数据和上一份记录均未引用的图片。", "检查并清理", clean));
+    root.append(panel, el("div", { class:"setting-panel" }, [el("h3", { text:"使用提示" }), el("p", { class:"muted", style:"font-size:12px;margin-top:12px;line-height:2", text:"可在上方设置启动文件夹，重开时自动尝试连接。请使用同一浏览器打开同一路径的 index.html；移动页面、无痕模式或清理浏览器数据后，可能需要重新设置。保存物品后，等到出现“已保存到文件夹”再退出。同一份数据请只用一个页面编辑。图片保留原始清晰度，列表使用缩略图。分类中的物品（包括回收站物品）移走后，才能删除分类。" }), el("pre", { text:"所选文件夹 / item-shelf-data /\n  workspace.json     文件夹标记\n  data.json          当前记录\n  data.previous.json 上一份记录\n  images/            原图与缩略图\n  safety-backups/    恢复前的安全备份" })]));
+  }
+  function render() {
+    clearPageUrls(); const token = ++ui.renderId, root = $("content"); root.replaceChildren();
+    const [route,id] = (location.hash || "#/home").slice(2).split("/");
+    if ((!ui.store && route !== "settings") || route === "home" || !route) home(root); else if (route === "major") majorPage(root,id); else if (["all","minor","trash","search"].includes(route)) listPage(root,route,id,token); else if (route === "item") detailPage(root,id,token); else if (route === "settings") settings(root); else home(root);
+    refreshChrome();
+  }
+  function formError(text) { if ($("form-error")) { $("form-error").textContent = text; $("form-error").hidden = !text; } }
+  function closeDialog(force) {
+    if (ui.busy && !force) return false;
+    if (!force && ui.dialogDirty && !window.confirm("这次编辑尚未保存，确定放弃吗？")) return false;
+    ui.dialogDirty = false; ui.modal = null;
+    for (const url of ui.dialogUrls) URL.revokeObjectURL(url); ui.dialogUrls = [];
+    if ($("dialog").open) $("dialog").close(); $("dialog").classList.remove("zoom-dialog"); return true;
+  }
+  function openDialog(title, caption) {
+    if ($("dialog").open && !closeDialog()) return null;
+    const inner = el("div", { class:"dialog-inner" });
+    const close = button("", () => closeDialog(), "icon-button", "close"); close.setAttribute("aria-label", "关闭对话框");
+    inner.append(el("div", { class:"dialog-head" }, [el("h2", { text:title }), close]));
+    if (caption) inner.append(el("p", { class:"dialog-subtitle", text:caption }));
+    $("dialog-content").replaceChildren(inner); ui.dialogDirty = false; ui.modal = { inner };
+    $("dialog").showModal(); return inner;
+  }
+  function field(label, control) { const wrap = el("label", { class:"form-field" }, [el("span", { text:label }), control]); control.addEventListener("input", () => { ui.dialogDirty = true; }); control.addEventListener("change", () => { ui.dialogDirty = true; }); return wrap; }
+  function errorBox() { return el("div", { id:"form-error", class:"form-error", role:"alert", hidden:true }); }
+  function categoryDialog(kind, item, parentId) {
+    if (!requireStore()) return;
+    if (kind === "minor" && !data().majorCategories.length) { toast("请先添加一个大分类。"); return; }
+    const inner = openDialog((item ? "管理" : "新建") + (kind === "major" ? "大分类" : "小分类"), "按自己的习惯命名；分类名称可以重复。"); if (!inner) return;
+    const name = el("input", { type:"text", value:item ? item.name : "", maxLength:60, placeholder:kind === "major" ? "例如：衣服、鞋子、工具" : "例如：毛衣、裤子、外套", required:true });
+    const form = el("form"); form.append(field("分类名称",name));
+    let parent = null;
+    if (kind === "minor" && !item) { parent = selectControl(data().majorCategories.map(value => [value.id,value.name]), parentId || data().majorCategories[0].id, () => {}, "所属大分类"); form.append(field("所属大分类",parent)); }
+    form.append(errorBox()); const actions = el("div", { class:"form-actions" });
+    if (item) actions.append(button("删除分类", async () => {
+      try { C.Ops[kind === "major" ? "deleteMajor" : "deleteMinor"](C.copy(data()),item.id); } catch (error) { formError(message(error)); return; }
+      if (!window.confirm("删除空分类“" + item.name + "”？")) return;
+      const result = await task("保存分类变更…", () => ui.store.transact(snapshot => C.Ops[kind === "major" ? "deleteMajor" : "deleteMinor"](snapshot,item.id)));
+      if (result.ok) { closeDialog(true); navigate(kind === "major" ? "#/home" : "#/major/" + item.majorId); render(); toast(ui.store.isDemo ? "示例分类已删除" : "空分类已删除并保存"); }
+    }, "danger-button"));
+    actions.append(button("取消", () => closeDialog())); const save = button("保存分类", () => {}, "primary"); save.type = "submit"; actions.append(save); form.append(actions); inner.append(form);
+    form.addEventListener("submit", async event => {
+      event.preventDefault(); const value = name.value.trim(); if (!value) { formError("分类名称不能为空。"); name.focus(); return; } if (value.length > 60) { formError("分类名称不能超过 60 个字符。"); return; }
+      const result = await task("保存分类…", () => ui.store.transact(snapshot => item ? C.Ops[kind === "major" ? "renameMajor" : "renameMinor"](snapshot,item.id,value) : kind === "major" ? C.Ops.addMajor(snapshot,value) : C.Ops.addMinor(snapshot,parent.value,value)));
+      if (result.ok) { closeDialog(true); if (!item) navigate("#/" + (kind === "major" ? "major/" : "minor/") + result.value); render(); toast(ui.store.isDemo ? "示例已更新，刷新后清空" : "分类已保存到文件夹"); }
+    });
+    name.focus();
+  }
+  function imageType(file) {
+    const ext = (file.name.match(/\.([a-z0-9]+)$/i) || [])[1];
+    const extension = Object.keys(C.TYPES).find(key => C.TYPES[key] === file.type) || (ext && Object.prototype.hasOwnProperty.call(C.TYPES,ext.toLowerCase()) ? ext.toLowerCase() : null);
+    if (!extension || file.size <= 0 || file.size > C.MAX_IMAGE) throw new Error("请选择不超过 40 MB 的 JPG、PNG、WebP、GIF、HEIC、HEIF、AVIF 或 BMP 图片。");
+    return extension;
+  }
+  async function makeThumbnail(file) {
+    let bitmap = null;
+    try {
+      if (typeof createImageBitmap !== "function") return null;
+      bitmap = await createImageBitmap(file, { resizeWidth:480, resizeQuality:"high", imageOrientation:"from-image" });
+      const canvas = document.createElement("canvas"), size = Math.max(bitmap.width,bitmap.height);
+      canvas.width = Math.max(1,Math.round(bitmap.width * Math.min(1,480 / size))); canvas.height = Math.max(1,Math.round(bitmap.height * Math.min(1,480 / size)));
+      const ctx = canvas.getContext("2d"); if (!ctx) return null; ctx.fillStyle = "#f4f3eb"; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);
+      const blob = await new Promise(resolve => canvas.toBlob(resolve,"image/jpeg",.8)); return blob ? { blob, extension:"jpg" } : null;
+    } catch (_) { return null; } finally { if (bitmap) bitmap.close(); }
+  }
+  async function prepareImage(file) { return { original:{ blob:file, extension:imageType(file) }, thumbnail:await makeThumbnail(file), sourceName:file.name }; }
+  function itemDialog(item, defaultMinor) {
+    if (!requireStore()) return;
+    if (!data().minorCategories.length) { toast("先添加一个小分类，再记录物品。"); if (!data().majorCategories.length) categoryDialog("major"); else categoryDialog("minor",null,data().majorCategories[0].id); return; }
+    const inner = openDialog(item ? "编辑物品" : "记录一件新物品", "一张图片、一个标题，再加上你想记住的细节。"); if (!inner) return;
+    const model = ui.modal; model.file = null;
+    const form = el("form"), title = el("input", { type:"text", value:item ? item.title : "", maxLength:160, required:true, placeholder:"给物品起个容易找到的名字" });
+    const choices = data().minorCategories.map(value => { const major = data().majorCategories.find(obj => obj.id === value.majorId); return [value.id,major.name + " / " + value.name]; });
+    const minor = selectControl(choices, item ? item.minorId : defaultMinor || ui.lastMinor || choices[0][0], () => {}, "物品所属小分类"); if (!minor.value) minor.value = choices[0][0];
+    const locationInput = el("input", { type:"text", value:item ? item.location : ui.lastLocation, maxLength:160, placeholder:"例如：卧室衣柜第二层（选填）" });
+    const description = el("textarea", { value:item ? item.description : "", maxLength:4000, placeholder:"材质、用途，或者任何想记住的事（选填）", rows:3 });
+    const preview = el("img", { alt:"待保存的物品图片", hidden:true }), imageInfo = el("p", { text:item ? "已保存的物品图片，可拍照或从相册替换。" : "添加一张物品照片，原图会独立保存。" });
+    const pick = el("input", { type:"file", accept:"image/*", hidden:true }), camera = el("input", { type:"file", accept:"image/*", capture:"environment", hidden:true });
+    const photo = el("div", { class:"photo-picker" }, [icon("image"),preview,imageInfo,el("div", { class:"buttons" }, [button("从相册选择", () => pick.click(), "", "image"),button("拍照", () => camera.click(), "", "plus")]),pick,camera]);
+    const setPreview = blob => { if (ui.modal !== model) return; const url = URL.createObjectURL(blob); ui.dialogUrls.push(url); preview.src = url; preview.hidden = false; photo.classList.add("with-image"); };
+    preview.addEventListener("error", () => { preview.hidden = true; photo.classList.remove("with-image"); imageInfo.textContent += " 当前格式不能预览，可选择 JPG 或 PNG。"; });
+    if (item) ui.store.getMedia(item.image.thumbnail || item.image.original).then(blob => { if (!model.file) setPreview(blob); }).catch(() => { if (!model.file) imageInfo.textContent = "原图片无法读取，请选择新图片后保存。"; });
+    const picked = event => {
+      const file = event.target.files && event.target.files[0]; event.target.value = ""; if (!file) return;
+      try { imageType(file); model.file = file; ui.dialogDirty = true; setPreview(file); imageInfo.textContent = file.name + " · " + (file.size / 1048576).toFixed(2) + " MB · 等待保存"; formError(""); } catch (error) { formError(message(error)); }
+    };
+    pick.addEventListener("change",picked); camera.addEventListener("change",picked);
+    form.append(photo,field("物品标题 *",title),field("所属分类 *",minor),field("存放位置",locationInput),field("描述",description),el("p", { class:"form-note", text:ui.store.isDemo ? "示例修改仅本次有效。可通过修改所属分类移动物品。" : "保存后会自动写入文件夹。可通过修改所属分类移动物品。" }),errorBox());
+    const save = async again => {
+      if (ui.busy) return;
+      if (!title.value.trim()) { formError("物品标题不能为空或只有空格。"); title.focus(); return; }
+      if (!minor.value) { formError("请选择所属小分类。"); return; }
+      if (!item && !model.file) { formError("请先拍照或选择一张物品图片。"); return; }
+      const sourceHash = location.hash || "#/home";
+      const result = await task("保存物品与图片…", async () => {
+        const media = model.file ? await prepareImage(model.file) : undefined;
+        const input = { id:item && item.id, minorId:minor.value, title:title.value, description:description.value, location:locationInput.value };
+        const id = await ui.store.transact((snapshot,image) => C.Ops.saveItem(snapshot, { ...input, image }), media);
+        return { id, withoutThumbnail:media && !media.thumbnail };
+      });
+      if (result.ok) {
+        ui.lastMinor = minor.value; ui.lastLocation = locationInput.value.trim(); closeDialog(true);
+        if (again) { render(); itemDialog(null,ui.lastMinor); }
+        else { if (!item) ui.returnHash = sourceHash === "#/home" ? "#/minor/" + ui.lastMinor : sourceHash; navigate("#/item/" + result.value.id); render(); }
+        toast(ui.store.isDemo ? "示例已更新，刷新后清空" : result.value.withoutThumbnail ? "原图已保存，当前格式未生成缩略图" : "物品已保存到文件夹");
+      }
+    };
+    const actions = el("div", { class:"form-actions" }, [button("取消", () => closeDialog()),...(!item ? [button("保存并继续", () => save(true), "secondary")] : [])]);
+    const submit = button("保存物品", () => {}, "primary", "check"); submit.type = "submit"; actions.append(submit); form.append(actions); inner.append(form);
+    form.addEventListener("submit", event => { event.preventDefault(); save(false); });
+  }
+  async function itemAction(action, item) {
+    if (!requireStore()) return;
+    const prompt = action === "trash" ? "将“" + item.title + "”移入回收站？之后可以恢复。" : action === "purge" ? "彻底删除“" + item.title + "”？删除后无法从回收站恢复，需另有备份才能找回。" : null;
+    if (prompt && !window.confirm(prompt)) return;
+    const result = await task("保存物品变更…", () => ui.store.transact(snapshot => C.Ops[action](snapshot,item.id)));
+    if (result.ok) { navigate(action === "restore" ? "#/minor/" + item.minorId : action === "purge" ? "#/trash" : ui.returnHash); render(); toast(ui.store.isDemo ? "示例已更新" : action === "restore" ? "物品已恢复" : action === "trash" ? "已移入回收站" : "已从回收站彻底删除"); }
+  }
+  async function zoom(item) {
+    const inner = openDialog(item.title,"可使用手机的缩放手势查看图片。"); if (!inner) return; $("dialog").classList.add("zoom-dialog"); const model = ui.modal;
+    const loading = el("p", { class:"muted", text:"正在读取清晰原图…" }); inner.append(loading);
+    try { const blob = await ui.store.getMedia(item.image.original); if (ui.modal !== model) return; const url = URL.createObjectURL(blob); ui.dialogUrls.push(url); loading.remove(); const image = el("img", { src:url, alt:item.title }); image.addEventListener("error", () => { image.remove(); inner.append(el("p", { text:"原图已保存，但浏览器无法显示此格式。" })); }); inner.append(image); } catch (error) { loading.textContent = message(error); }
+  }
+  function pickerAvailable() { if (!window.isSecureContext || typeof window.showDirectoryPicker !== "function") { toast("当前打开环境不支持直接读写文件夹。请使用已通过检测的手机 Edge 打开方式。"); return false; } return true; }
+  const preferences = () => new S.Preferences(window.indexedDB);
+  function startupError(error) {
+    return ({ SecurityError:"当前打开方式不允许记住启动文件夹，仍可手动连接。", DataCloneError:"当前浏览器无法保存文件夹引用，仍可手动连接。", QuotaExceededError:"浏览器设置空间不足，启动文件夹未能记住。" })[error.name] || error.message || String(error);
+  }
+  function startupDescription() {
+    if (ui.startup.state === "loading") return "正在检查启动文件夹设置…";
+    if (ui.startup.state === "error") return ui.startup.issue || "启动文件夹暂时无法连接，请重试或重新选择。";
+    if (!ui.startup.entry) return "尚未设置。选择一次，后续打开会自动尝试加载这个文件夹。";
+    return "已记住：" + ui.startup.entry.label + (ui.startup.state === "permission" ? "。请点击“继续授权”连接原目录。" : ui.startup.state === "connected" ? "。已自动连接。" : "。下次打开会自动尝试连接。");
+  }
+  function activateStore(store, preserveRoute) {
+    ui.store = store; clearTimeout(ui.searchTimer); ui.query = ""; $("search").value = ""; ui.filterMajor = ""; ui.filterLocation = ""; ui.limit = 24;
+    if (!preserveRoute) navigate("#/home"); render();
+  }
+  async function loadStartup() {
+    const connectionEpoch = ui.connectionEpoch, preferenceEpoch = ui.preferenceEpoch;
+    try {
+      const entry = await preferences().load();
+      if (preferenceEpoch !== ui.preferenceEpoch) return;
+      ui.startup = { entry, state:entry ? "saved" : "off", issue:"" }; render();
+      if (entry && connectionEpoch === ui.connectionEpoch && !ui.store && !ui.busy) await resumeStartup(false);
+    } catch (error) {
+      if (preferenceEpoch !== ui.preferenceEpoch) return;
+      ui.startup = { entry:null, state:"error", issue:startupError(error) }; render();
+    }
+  }
+  async function resumeStartup(interactive) {
+    if (ui.busy || !ui.startup.entry) return;
+    if ($("dialog").open && !closeDialog()) return;
+    if (interactive && ui.store && ui.store.isDemo && !window.confirm("离开示例，打开已记住的物品清单？示例中的修改不会写入正式数据。")) return;
+    ui.connectionEpoch++;
+    const result = await task(interactive ? "连接启动文件夹…" : "自动连接启动文件夹…", () => S.reopen(ui.startup.entry, interactive, (root,id) => C.FolderStore.openExisting(root,id)));
+    if (!result.ok) {
+      ui.startup.state = result.error.name === "NotAllowedError" ? "permission" : "error";
+      ui.startup.issue = "启动文件夹未能连接：" + message(result.error); render(); return;
+    }
+    if (result.value.state === "permission") {
+      ui.startup.state = "permission"; ui.startup.issue = ""; render();
+      if (interactive) toast("未获得读写授权，已保留启动文件夹设置。可再次授权或重新选择。"); return;
+    }
+    ui.startup.state = "connected"; ui.startup.issue = "";
+    result.value.store.displayName = ui.startup.entry.label;
+    activateStore(result.value.store, !interactive);
+    if (ui.store.recovery) toast("已只读打开上一份记录，请先恢复数据");
+    else if (interactive) toast("已连接记住的文件夹");
+  }
+  async function rememberCurrent() {
+    if (!requireStore() || ui.store.isDemo) return;
+    ui.preferenceEpoch++;
+    const result = await task("记住启动文件夹…", () => preferences().save(ui.store.root, ui.store.data.libraryId, ui.store.displayName || ui.store.root.name));
+    if (result.ok) { ui.startup = { entry:result.value, state:"saved", issue:"" }; render(); toast("已记住，重新打开会自动尝试连接这个文件夹"); }
+    else { ui.startup = { entry:null, state:"error", issue:"启动设置未能确认：" + startupError(result.error) }; render(); }
+  }
+  async function forgetStartup() {
+    if (ui.busy) return; ui.preferenceEpoch++; ui.connectionEpoch++;
+    const result = await task("移除启动设置…", () => preferences().clear());
+    if (result.ok) { ui.startup = { entry:null, state:"off", issue:"" }; render(); toast("已取消记住，物品和照片仍保留在原文件夹"); }
+    else { ui.startup.state = "error"; ui.startup.issue = "启动设置未能移除：" + startupError(result.error); render(); }
+  }
+  async function connect(rememberOption) {
+    const remember = rememberOption === true;
+    if (ui.busy || !pickerAvailable()) return;
+    if ($("dialog").open && !closeDialog()) return;
+    if (ui.store && ui.store.isDemo && !window.confirm("连接文件夹后会离开示例，示例中的修改不会写入你的正式数据。继续吗？")) return;
+    ui.connectionEpoch++; if (remember) ui.preferenceEpoch++;
+    const result = await task("连接并读取文件夹…", async () => {
+      const parent = await window.showDirectoryPicker({ mode:"readwrite", id:"item-shelf-data" });
+      const store = await C.FolderStore.open(parent); store.displayName = parent.name === store.root.name ? store.root.name : parent.name + " / " + store.root.name;
+      let entry = null, preferenceError = null;
+      if (remember) try { entry = await preferences().save(store.root, store.data.libraryId, store.displayName); } catch (error) { preferenceError = error; }
+      return { store, entry, preferenceError };
+    });
+    if (result.ok) {
+      if (remember) ui.startup = result.value.preferenceError ? { entry:null, state:"error", issue:"本次已连接，但启动设置未能确认：" + startupError(result.value.preferenceError) } : { entry:result.value.entry, state:"saved", issue:"" };
+      else if (ui.startup.state === "connected") ui.startup.state = "saved";
+      activateStore(result.value.store, false);
+      if (result.value.preferenceError) { navigate("#/settings"); toast(ui.startup.issue); }
+      else toast(ui.store.recovery ? "已只读打开上一份记录，请先恢复数据" : remember ? "启动文件夹已记住，重开时会自动尝试连接" : "数据文件夹已连接");
+    } else if (remember && ui.startup.state === "loading") { ui.startup = { entry:null, state:"off", issue:"" }; loadStartup(); }
+  }
+  async function backup() {
+    if (!requireStore() || !pickerAvailable()) return; if (ui.store.isDemo) { toast("请连接正式数据文件夹后再制作备份。"); return; }
+    const result = await task("制作完整备份…", async () => { const parent = await window.showDirectoryPicker({ mode:"readwrite", id:"item-shelf-backup" }); return ui.store.backup(parent,progress); });
+    if (result.ok) toast("完整备份已完成：" + result.value);
+  }
+  async function restore() {
+    if (!requireStore() || !pickerAvailable()) return; if (ui.store.isDemo) { toast("请先连接正式数据文件夹。"); return; }
+    const inspected = await task("读取备份信息…", async () => { const dir = await window.showDirectoryPicker({ mode:"read", id:"item-shelf-restore" }); return C.inspectBackup(dir); });
+    if (!inspected.ok) return;
+    const snapshot = inspected.value, inner = openDialog("从完整备份恢复","请选择具体的“物品备份-…”文件夹，而不是它的上级目录。"); if (!inner) return;
+    inner.append(el("p", { text:"备份包含 " + snapshot.data.majorCategories.length + " 个大分类、" + snapshot.data.minorCategories.length + " 个小分类、" + snapshot.data.items.length + " 件物品（含回收站）。" }),el("p", { class:"form-note", style:"margin-top:12px", text:"备份时间：" + new Date(snapshot.marker.createdAt).toLocaleString("zh-CN") + "。恢复会替换当前清单；开始前会自动制作当前清单的完整安全备份，任一图片校验失败都会停止恢复。" }));
+    const confirm = el("input", { type:"text", placeholder:"输入“恢复”确认" }); inner.append(field("确认整库恢复",confirm),errorBox(),el("div", { class:"form-actions" }, [button("取消", () => closeDialog()),button("开始恢复", async () => {
+      if (confirm.value.trim() !== "恢复") { formError("请先输入“恢复”确认整库替换。"); return; }
+      const result = await task("校验图片并恢复备份…", () => ui.store.restore(snapshot,progress));
+      if (result.ok) { closeDialog(true); ui.filterMajor = ""; ui.filterLocation = ""; navigate("#/home"); render(); toast("恢复完成，恢复前的清单已保留在 safety-backups 中"); }
+    }, "primary")]));
+  }
+  async function clean() {
+    if (!requireStore() || ui.store.isDemo) { toast("请先连接正式数据文件夹。"); return; }
+    if (!window.confirm("清理当前数据和上一份记录均未引用的图片？当前物品、回收站和完整备份中的图片会保留。")) return;
+    const result = await task("检查并清理未引用图片…", () => ui.store.cleanUnused()); if (result.ok) toast("已清理 " + result.value + " 个未引用图片文件");
+  }
+  async function demoPicture(kind,color) {
+    const canvas = document.createElement("canvas"); canvas.width = 400; canvas.height = 400; const ctx = canvas.getContext("2d");
+    ctx.fillStyle = color; ctx.fillRect(0,0,400,400); ctx.fillStyle = "#0000000a"; ctx.beginPath(); ctx.ellipse(200,335,95,13,0,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = kind === "shirt" ? "#b8a58a" : kind === "shoe" ? "#eeeadd" : kind === "book" ? "#547361" : "#718181"; ctx.strokeStyle = "#35463445"; ctx.lineWidth = 3;
+    if (kind === "shirt") { ctx.beginPath(); ctx.moveTo(145,91);ctx.lineTo(86,131);ctx.lineTo(115,193);ctx.lineTo(145,174);ctx.lineTo(145,310);ctx.lineTo(255,310);ctx.lineTo(255,174);ctx.lineTo(285,193);ctx.lineTo(314,131);ctx.lineTo(255,91);ctx.quadraticCurveTo(200,136,145,91);ctx.fill();ctx.stroke();ctx.strokeStyle="#88785b60";for(let x=160;x<251;x+=11){ctx.beginPath();ctx.moveTo(x,153);ctx.lineTo(x,300);ctx.stroke();} }
+    else if (kind === "shoe") { ctx.beginPath();ctx.moveTo(85,210);ctx.lineTo(108,153);ctx.lineTo(169,182);ctx.lineTo(201,235);ctx.lineTo(300,264);ctx.quadraticCurveTo(331,281,316,304);ctx.lineTo(80,304);ctx.closePath();ctx.fill();ctx.stroke();ctx.strokeStyle="#9eaa9a";ctx.beginPath();ctx.moveTo(90,285);ctx.lineTo(314,285);ctx.moveTo(180,216);ctx.lineTo(212,202);ctx.moveTo(190,233);ctx.lineTo(223,218);ctx.stroke(); }
+    else if (kind === "book") { ctx.fillRect(115,85,173,235);ctx.fillStyle="#e9e6cf";ctx.fillRect(116,296,170,16);ctx.fillStyle="#ffffffa0";ctx.fillRect(141,124,121,3);ctx.fillRect(141,146,80,3);ctx.fillRect(141,247,45,2); }
+    else { ctx.fillRect(109,124,183,182);ctx.fillStyle="#d2dbd4";ctx.fillRect(126,142,149,128);ctx.strokeRect(109,124,183,182);ctx.strokeStyle="#5b6a5c";ctx.beginPath();ctx.arc(200,130,55,Math.PI,0);ctx.stroke(); }
+    return new Promise(resolve => canvas.toBlob(resolve,"image/png"));
+  }
+  async function startDemo() {
+    if (ui.store && !window.confirm("进入示例会暂时离开当前清单，已保存的文件不会改变。继续吗？")) return;
+    ui.connectionEpoch++;
+    const result = await task("准备示例物品…", async () => {
+      const store = new C.MemoryStore(); let clothing,shoes,books,tools,sweaters,coats,sport,reading,small;
+      await store.transact(d => { clothing=C.Ops.addMajor(d,"衣服");shoes=C.Ops.addMajor(d,"鞋子");books=C.Ops.addMajor(d,"书籍");tools=C.Ops.addMajor(d,"随身与工具");sweaters=C.Ops.addMinor(d,clothing,"毛衣");coats=C.Ops.addMinor(d,clothing,"外套");sport=C.Ops.addMinor(d,shoes,"运动鞋");reading=C.Ops.addMinor(d,books,"正在阅读");small=C.Ops.addMinor(d,tools,"常用小物"); });
+      const samples = [["米色羊毛毛衣",sweaters,"卧室衣柜第二层","shirt","#eeebe2"],["深色针织毛衣",sweaters,"卧室衣柜第二层","shirt","#e1e8de"],["秋日轻薄外套",coats,"玄关衣架","shirt","#e5e8df"],["白色日常运动鞋",sport,"玄关鞋柜","shoe","#e9e5dc"],["周末跑步鞋",sport,"玄关鞋柜","shoe","#dde7e1"],["日常阅读笔记",reading,"书桌左侧","book","#e5e7dc"],["随身收纳包",small,"书桌抽屉","bag","#e7e3db"],["常用工具盒",small,"储物柜上层","bag","#e0e8e6"]];
+      for (const [title,minorId,location,kind,color] of samples) { const blob = await demoPicture(kind,color); const image={original:{blob,extension:"png"},thumbnail:{blob,extension:"png"},sourceName:"示例插画.png"}; await store.transact((d,photo)=>C.Ops.saveItem(d,{title,minorId,location,description:"这是一件用于体验界面和搜索的示例物品。",image:photo}),image); }
+      return store;
+    });
+    if (result.ok) { ui.store=result.value;ui.query="";$("search").value="";ui.filterMajor="";ui.filterLocation="";navigate("#/home");render(); }
+  }
+  for (const node of document.querySelectorAll("[data-icon]")) node.replaceWith(icon(node.dataset.icon));
+  for (const node of document.querySelectorAll("[data-route]")) node.addEventListener("click",()=>{ui.query="";$("search").value="";ui.filterMajor="";ui.filterLocation="";navigate("#/"+node.dataset.route);});
+  $("top-add").addEventListener("click",()=>itemDialog()); $("sidebar-connect").addEventListener("click",connect);
+  $("startup-resume").addEventListener("click",()=>resumeStartup(true)); $("startup-settings").addEventListener("click",()=>navigate("#/settings"));
+  const search = () => { if(ui.composing)return; clearTimeout(ui.searchTimer);ui.searchTimer=setTimeout(()=>{ui.query=$("search").value;ui.limit=24;if(location.hash!=="#/search"){ui.filterMajor="";ui.filterLocation="";navigate("#/search");}else render();},180); };
+  $("search").addEventListener("input",search); $("search").addEventListener("compositionstart",()=>{ui.composing=true;});$("search").addEventListener("compositionend",()=>{ui.composing=false;search();});
+  $("clear-search").addEventListener("click",()=>{clearTimeout(ui.searchTimer);ui.query="";$("search").value="";navigate("#/all");$("search").focus();});
+  $("dialog").addEventListener("cancel",event=>{event.preventDefault();closeDialog();});
+  $("recover-previous").addEventListener("click",async()=>{if(!ui.store||!ui.store.recovery)return;if(!window.confirm("恢复上一份记录？最新一次未完成或损坏的变更可能不在其中，现有异常文件会另存保留。"))return;const result=await task("恢复上一份记录…",()=>ui.store.recoverPrevious());if(result.ok){render();toast("上一份记录已恢复，可以继续编辑");}});
+  window.addEventListener("hashchange",()=>{
+    if(ui.busy){history.replaceState(null,"",ui.lastHash);return;}
+    if($("dialog").open&&!closeDialog()){history.replaceState(null,"",ui.lastHash);return;}
+    ui.lastHash=location.hash||"#/home";render();requestAnimationFrame(()=>window.scrollTo(0,ui.scroll.get(ui.lastHash)||0));
+  });
+  window.addEventListener("beforeunload",event=>{if(ui.busy||ui.dialogDirty){event.preventDefault();event.returnValue="";}});
+  render();
+  loadStartup();
+})();
+</script>
+</body>
+</html>
